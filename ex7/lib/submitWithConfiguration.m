@@ -1,7 +1,7 @@
 function submitWithConfiguration(conf)
   addpath('./lib/jsonlab');
 
-  parts = parts(conf);
+  parts = partsFunc(conf);
 
   fprintf('== Submitting solutions | %s...\n', conf.itemName);
 
@@ -19,7 +19,7 @@ function submitWithConfiguration(conf)
   end
 
   try
-    response = submitParts(conf, email, token, parts);
+    response = submitpartsFunc(conf, email, token, parts);
   catch
     e = lasterror();
     fprintf('\n!! Submission failed: %s\n', e.message);
@@ -61,9 +61,9 @@ function isValid = isValidPartOptionIndex(partOptions, i)
   isValid = (~isempty(i)) && (1 <= i) && (i <= numel(partOptions));
 end
 
-function response = submitParts(conf, email, token, parts)
+function response = submitpartsFunc(conf, email, token, parts)
   body = makePostBody(conf, email, token, parts);
-  submissionUrl = submissionUrl();
+  submissionUrl = submissionUrlFunc();
 
   responseBody = getResponse(submissionUrl, body);
   jsonResponse = validateResponse(responseBody);
@@ -89,7 +89,7 @@ function partsStruct = makePartsStruct(conf, parts)
   end
 end
 
-function [parts] = parts(conf)
+function [parts] = partsFunc(conf)
   parts = {};
   for partArray = conf.partArrays
     part.id = partArray{:}{1};
@@ -174,6 +174,6 @@ end
 % Service configuration
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function submissionUrl = submissionUrl()
+function submissionUrl = submissionUrlFunc()
   submissionUrl = 'https://www-origin.coursera.org/api/onDemandProgrammingImmediateFormSubmissions.v1';
 end

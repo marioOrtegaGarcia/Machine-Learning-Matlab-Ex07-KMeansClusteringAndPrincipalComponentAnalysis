@@ -29,10 +29,11 @@ for i = 1:K
     diffMag = sum((X - centroids(i,:)).^2,2);
     % Storing distance
     D(:,i) = diffMag;
-end
-   % Getting our minimum index from our distance matrix
-    [~,mini] = min(D,[],2);
+    % Getting our minimum index from our distance matrix
+    [~,mini] = min(D');
     idx = mini';
+end
+   
 
 % =============================================================
 
