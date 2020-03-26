@@ -20,11 +20,8 @@ S = zeros(n);
 %       number of examples).
 %
 
-
-
-
-
-
+Sig = (1/m) * (X' * X); % Sig is the covariance matrix
+[U,S,~] = svd(Sig);     % Singular value decomposition to find our projected directions
 
 % =========================================================================
 
