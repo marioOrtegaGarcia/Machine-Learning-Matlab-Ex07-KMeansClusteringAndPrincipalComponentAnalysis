@@ -31,8 +31,7 @@ for i = 1:K
     D(:,i) = diffMag;
 end
    % Getting our minimum index from our distance matrix
-    [~,mini] = min(D,[],2);
-    idx = mini';
+    [~,idx] = min(D,[],2);
 
 % =============================================================
 
